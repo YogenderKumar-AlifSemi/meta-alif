@@ -8,7 +8,7 @@
 
 SUMMARY = "Minimal boot requirements for the APSS"
 DESCRIPTION = "The set of packages required to boot the APSS"
-PR = "r11"
+PR = "r12"
 
 inherit packagegroup
 
@@ -50,6 +50,7 @@ hyperram-test \
 ${@bb.utils.contains('DISTRO_FEATURES', 'apss-debug', 'gdbserver', '', d)} \
 ${@bb.utils.contains_any('DISTRO_FEATURES', ['apss-sd-boot', 'apss-usb-boot'], '${SD_PACKAGES}', '', d)} \
 ${@bb.utils.contains('DISTRO_FEATURES', 'apss-cdc200', '${CDC200_PACKAGES}', '', d)} \
+${@bb.utils.contains('DISTRO_FEATURES', 'apss-mipidsi', '${CDC200_PACKAGES}', '', d)} \
 ${@bb.utils.contains('DISTRO_FEATURES', 'apss-mhu', '${MHU_WDOG_PACKAGES}', '', d)} \
 ${@bb.utils.contains('DISTRO_FEATURES', 'apss-hwsem', '${HWSEM_PACKAGES}', '', d)} \
 ${@bb.utils.contains('DISTRO_FEATURES', 'apss-crc', '${CRC_PACKAGES}', '', d)} \
@@ -79,7 +80,6 @@ GRAPHICS_PACKAGES = " \
 
 CDC200_PACKAGES = " \
 	a32-linux-dd-testcases-cdc200 \
-	lv-port-linux-frame-buffer \
 "
 
 HWSEM_PACKAGES = " \
