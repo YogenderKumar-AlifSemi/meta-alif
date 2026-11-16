@@ -8,11 +8,15 @@
 
 SUMMARY = "Minimal boot requirements for the APSS"
 DESCRIPTION = "The set of packages required to boot the APSS"
-PR = "r14"
+PR = "r15"
+
+# Dependencies vary with DISTRO_FEATURES, so this must be set before
+# inherit packagegroup. Otherwise the class snapshots PACKAGE_ARCH as
+# "all" and inherits allarch, which rejects Debian-renamed deps such as
+# libdrm -> libdrm2.
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 PACKAGES = " \
 packagegroup-core-apss \
